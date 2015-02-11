@@ -19,27 +19,32 @@
             this.data = null;
         }
 
+        /// <summary>
+        /// Adds request header given name and value.
+        /// </summary>
         public HttpRequestBuilder WithHeader(string name, string value)
         {
             this.request.Headers[name] = value;
             return this;
         }
-
+        
+        /// <summary>
+        /// Adds request body given object. 
+        /// </summary>
         public HttpRequestBuilder WithBody(object body)
         {
             this.data = Encoding.UTF8.GetBytes(body.ToString());
-            return this.WithHeader("ContentLength", data.Length.ToString());
+            return this;
         }
 
-        public Task<TResult> ExecuteResult<TResult>()
+        public Task<TResult> CallFor<TResult>()
         {
-            var resultTask = this.Execute()
+            var resultTask = this.ExecuteInternal()
                 .ContinueWith(task =>
                 {
-                    var responseStream = task.Result.GetResponseStream();
-
-                    using (responseStream)
-                    using (var streamReader = new StreamReader(responseStream))
+                    using (var webResponse = task.Result)
+                    using (var stream = webResponse.GetResponseStream())
+                    using (var streamReader = new StreamReader(stream))
                     using (var jsonReader = new JsonTextReader(streamReader))
                     {
                         var serializer = new JsonSerializer();
@@ -51,7 +56,25 @@
             return resultTask;
         }
 
-        public Task<WebResponse> Execute()
+        public Task Call()
+        {
+            var resultTask = this.ExecuteInternal()
+                .ContinueWith(task =>
+                {
+                    //using (task.Result)
+                    //{
+                    //    using (var stream = task.Result.GetResponseStream())
+                    //    using (var streamReader = new StreamReader(stream))
+                    //    {
+                    //        var responseBody = streamReader.ReadToEnd();
+                    //    }
+                    //}
+                });
+
+            return resultTask;
+        }
+
+        private Task<WebResponse> ExecuteInternal()
         {
             Task<WebResponse> responseTask;
 
