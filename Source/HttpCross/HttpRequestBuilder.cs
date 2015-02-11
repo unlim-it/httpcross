@@ -11,5 +11,16 @@
             this.request = WebRequest.Create(url);
             request.Method = method;
         }
+
+        public HttpRequestBuilder WithHeader(string name, string value)
+        {
+            this.request.Headers[name] = value;
+            return this;
+        }
+
+        public HttpRequestBuilder WithBody(object body)
+        {
+            return this;
+        }
     }
 }
