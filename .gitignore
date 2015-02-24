@@ -181,3 +181,8 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
+
+#ClientBin
+
+Source/HttpCross.Testing.API/ClientBin/
