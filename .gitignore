@@ -184,5 +184,4 @@ FakesAssemblies/
 
 
 #ClientBin
-
-Source/HttpCross.Testing.API/ClientBin/
+/Source/HttpCross.Testing.API/ClientBin/HttpCross.Testing.Silverlight.xap
