@@ -2,6 +2,7 @@ namespace HttpCross
 {
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Net;
 
     public class HttpCrossResponse
@@ -12,27 +13,23 @@ namespace HttpCross
         
         public IDictionary<string, string> Headers { get; private set; }
         public string Body { get; private set; }
-        public int Status { get; private set; }
+        public int StatusCode { get; private set; }
 
-        internal static HttpCrossResponse Create(WebRequest request, WebResponse response)
+        internal static HttpCrossResponse Create(HttpWebResponse response)
         {
-            using (response)
-            using (var stream = response.GetResponseStream())
-            using (var streamReader = new StreamReader(stream))
+            using (var responseStream = response.GetResponseStream())
+            using (var streamReader = new StreamReader(responseStream))
             {
-                var httpResponse = (HttpWebResponse)response;
                 var crossResponse = new HttpCrossResponse
                 {
+                    StatusCode = (int)response.StatusCode,
                     Body = streamReader.ReadToEnd(),
-                    Headers = new Dictionary<string, string>(),
-                    Status = (int)httpResponse.StatusCode
+                    Headers = response.Headers.AllKeys
+                        .Select(it => new { key = it, value = response.Headers[it] })
+                        .ToDictionary(it => it.key, it => it.value),
+                    
                 };
-
-                foreach (var key in response.Headers.AllKeys)
-                {
-                    crossResponse.Headers.Add(key, response.Headers[key]);
-                }
-
+                
                 return crossResponse;
             }
         }

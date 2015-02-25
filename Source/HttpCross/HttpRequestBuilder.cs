@@ -41,7 +41,26 @@
         public Task<HttpCrossResponse> Call()
         {
             var resultTask = this.ExecuteInternal()
-                .ContinueWith(task => HttpCrossResponse.Create(null, task.Result));
+                .ContinueWith(task =>
+                {
+                    if (task.Exception != null)
+                    {
+                        var webException = (WebException)task.Exception.InnerException;
+                        HttpCrossResponse errorResponse;
+                        using (var response = (HttpWebResponse)webException.Response)
+                        {
+                            errorResponse = HttpCrossResponse.Create(response);
+                        }
+
+                        throw new HttpCrossException(webException.Message, errorResponse);
+                    }
+
+                    using (var response = (HttpWebResponse)task.Result)
+                    {
+                        var crossResponse = HttpCrossResponse.Create(response);
+                        return crossResponse;
+                    }
+                });
 
             return resultTask;
         }

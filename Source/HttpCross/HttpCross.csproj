@@ -35,10 +35,11 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <Folder Include="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HttpCrossException.cs" />
     <Compile Include="Http.cs" />
+    <Compile Include="HttpCrossRequest.cs" />
     <Compile Include="HttpCrossResponse.cs" />
     <Compile Include="HttpRequestBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
