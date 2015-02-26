@@ -1,1 +1,1 @@
-# HttpCross (Cross Platform Http Client)
+# HttpCross
