@@ -48,7 +48,7 @@
         [Test, ExpectedException(typeof(HttpCrossException))]
         public async void Should_ThrowCustomException_When_WebExceptionAppear()
         {
-            await Http.Get("http://localhost:5055/no_existing_path").Call();
+            await Http.Get("http://localhost:5055/not_existing_path").Call();
         }
     }
 }

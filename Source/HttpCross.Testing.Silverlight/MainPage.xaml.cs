@@ -13,6 +13,12 @@
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            Http.Get("http://localhost:5055/api/test/1").Call()
+                .ContinueWith(
+                    it =>
+                    {
+                        ;
+                    });
         }
     }
 }

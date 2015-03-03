@@ -23,12 +23,15 @@ namespace HttpCross
                 var crossResponse = new HttpCrossResponse
                 {
                     StatusCode = (int)response.StatusCode,
-                    Body = streamReader.ReadToEnd(),
-                    Headers = response.Headers.AllKeys
-                        .Select(it => new { key = it, value = response.Headers[it] })
-                        .ToDictionary(it => it.key, it => it.value),
-                    
+                    Body = streamReader.ReadToEnd()
                 };
+
+                if (response.SupportsHeaders)
+                {
+                    crossResponse.Headers = response.Headers.AllKeys
+                        .Select(it => new { key = it, value = response.Headers[it] })
+                        .ToDictionary(it => it.key, it => it.value);
+                }
                 
                 return crossResponse;
             }
