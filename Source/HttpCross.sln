@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpCross", "HttpCross\HttpCross.csproj", "{225371AB-E5A7-47D2-BF0C-0BB519E1DF7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpCross.Portable", "HttpCross.Portable\HttpCross.Portable.csproj", "{225371AB-E5A7-47D2-BF0C-0BB519E1DF7E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{29451F06-5A1A-4622-9FC0-CCE0CF0735B8}"
 EndProject
