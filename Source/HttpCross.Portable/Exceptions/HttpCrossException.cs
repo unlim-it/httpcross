@@ -1,4 +1,4 @@
-﻿namespace HttpCross
+﻿namespace HttpCross.Exceptions
 {
     using System;
 

@@ -2,6 +2,9 @@
 {
     using System;
     using FluentAssertions;
+
+    using HttpCross.Exceptions;
+
     using NUnit.Framework;
 
     public class HttpCrossTests

@@ -5,6 +5,8 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    using HttpCross.Exceptions;
+
     public class HttpRequestBuilder
     {
         private readonly HttpWebRequest request;

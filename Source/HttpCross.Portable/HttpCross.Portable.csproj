@@ -37,13 +37,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="HttpCrossException.cs" />
+    <Compile Include="Exceptions\HttpCrossException.cs" />
     <Compile Include="Http.cs" />
     <Compile Include="HttpCrossRequest.cs" />
     <Compile Include="HttpCrossResponse.cs" />
     <Compile Include="HttpRequestBuilder.cs" />
+    <Compile Include="Serialization\FormContentSerializer.cs" />
+    <Compile Include="Serialization\IContentSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
