@@ -4,27 +4,18 @@
 
     public class HttpCrossException : Exception
     {
-        private readonly HttpCrossResponse response;
+        public HttpCrossException()
+        {
+        }
 
-        public HttpCrossException(string message, HttpCrossResponse response)
+        public HttpCrossException(string message)
             : base(message)
         {
-            this.response = response;
         }
 
-        public HttpCrossRequest Request 
+        public HttpCrossException(string message, Exception innerException)
+            : base(message, innerException)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-        public HttpCrossResponse Response
-        {
-            get
-            {
-                return this.response;
-            }
         }
     }
 }

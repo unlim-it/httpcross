@@ -37,6 +37,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\HttpOperationException.cs" />
     <Compile Include="Exceptions\HttpCrossException.cs" />
     <Compile Include="Http.cs" />
     <Compile Include="HttpCrossRequest.cs" />
