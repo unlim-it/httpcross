@@ -3,7 +3,7 @@
     public interface IContentSerializer
     {
         string ContentType { get; }
-        string Serialize(object content);
-        T Deserialize<T>(string content);
+        byte[] Serialize(object requestBody);
+        T Deserialize<T>(byte[] responseBody);
     }
 }

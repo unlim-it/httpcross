@@ -1,12 +1,20 @@
 namespace HttpCross
 {
-    using System.Net;
+    using System.Collections.Generic;
 
     public class HttpCrossRequest
     {
-        internal HttpCrossRequest(HttpWebRequest request)
+        internal HttpCrossRequest()
         {
-            //TODO: Add request properties.
+            this.Headers = new Dictionary<string, string>();
         }
+        
+        public string URL { get; internal set; }
+
+        public IDictionary<string, string> Headers { get; private set; }
+
+        public string Body { get; internal set; }
+
+        public string Method { get; internal set; }
     }
 }

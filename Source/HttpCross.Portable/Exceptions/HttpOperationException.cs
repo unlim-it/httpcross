@@ -1,14 +1,14 @@
 ﻿namespace HttpCross.Exceptions
 {
-    using System;
-
     public class HttpOperationException : HttpCrossException
     {
+        private readonly HttpCrossRequest request;
         private readonly HttpCrossResponse response;
 
-        public HttpOperationException(string message, HttpCrossResponse response)
+        public HttpOperationException(string message, HttpCrossRequest request, HttpCrossResponse response)
             : base(message)
         {
+            this.request = request;
             this.response = response;
         }
 
@@ -16,7 +16,7 @@
         {
             get
             {
-                throw new NotImplementedException();
+                return this.request;
             }
         }
         public HttpCrossResponse Response
