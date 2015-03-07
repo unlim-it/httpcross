@@ -37,15 +37,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\HttpContentSerializationException.cs" />
     <Compile Include="Exceptions\HttpOperationException.cs" />
     <Compile Include="Exceptions\HttpCrossException.cs" />
     <Compile Include="Http.cs" />
     <Compile Include="WebInvoker.cs" />
     <Compile Include="HttpCrossRequest.cs" />
     <Compile Include="HttpCrossResponse.cs" />
-    <Compile Include="Serialization\XmlContentSerializer.cs" />
-    <Compile Include="Serialization\IContentSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
