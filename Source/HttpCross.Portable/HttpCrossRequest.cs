@@ -16,5 +16,7 @@ namespace HttpCross
         public string Body { get; internal set; }
 
         public string Method { get; internal set; }
+
+        public string ContentType { get; internal set; }
     }
 }

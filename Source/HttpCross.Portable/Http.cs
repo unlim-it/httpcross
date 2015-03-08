@@ -37,13 +37,14 @@
         /// <summary>
         /// By default request body will not 
         /// </summary>
-        public Http WithBody(string content)
+        public Http WithBody(string content, string contentType = "text/html")
         {
             if (content == null)
             {
                 throw new ArgumentException("Content can not be null");
             }
-            
+
+            this.request.ContentType = contentType;
             this.request.Body = content;
             return this;
         }

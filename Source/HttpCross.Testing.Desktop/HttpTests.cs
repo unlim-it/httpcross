@@ -1,6 +1,8 @@
 ﻿namespace HttpCross.Testing.Desktop
 {
     using System;
+    using System.Collections.Generic;
+
     using FluentAssertions;
 
     using HttpCross.Exceptions;
@@ -9,6 +11,15 @@
 
     public class HttpTests
     {
+        [Test]
+        public async void Should_DeserializeResponseBodyFromJSONToSpecifiedObject()
+        {
+            var result = await Http.New
+                .GetJson<List<string>>("http://localhost:5055/api/books");
+
+            result.Count.Should().Be(10);
+        }
+
         [Test]
         public async void Should_AddRequestHeader()
         {
