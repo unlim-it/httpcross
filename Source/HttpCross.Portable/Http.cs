@@ -3,9 +3,12 @@
     using System;
     using System.Threading.Tasks;
 
+    using HttpCross.Exceptions;
+
     public class Http
     {
         private readonly HttpCrossRequest request;
+        private Action<HttpOperationException> exceptionHandler;
 
         private Http()
         {
@@ -58,6 +61,12 @@
             return this;
         }
 
+        public Http HandleException(Action<HttpOperationException> handler)
+        {
+            this.exceptionHandler = handler;
+            return this;
+        }
+
         /// <summary>
         /// Requests a representation of the specified resource.
         /// </summary>
@@ -66,7 +75,7 @@
             this.request.URL += url;
             this.request.Method = "GET";
 
-            return WebInvoker.Invoke(this.request);
+            return WebInvoker.Invoke(this.request, this.exceptionHandler);
         }
 
         /// <summary>
@@ -77,7 +86,7 @@
             this.request.URL += url;
             this.request.Method = "POST";
 
-            return WebInvoker.Invoke(this.request);
+            return WebInvoker.Invoke(this.request, this.exceptionHandler);
         }
 
         /// <summary>
@@ -88,7 +97,7 @@
             this.request.URL += url;
             this.request.Method = "PUT";
 
-            return WebInvoker.Invoke(this.request);
+            return WebInvoker.Invoke(this.request, this.exceptionHandler);
         }
         
         /// <summary>
@@ -99,7 +108,7 @@
             this.request.URL += url;
             this.request.Method = "DELETE";
 
-            return WebInvoker.Invoke(this.request);
+            return WebInvoker.Invoke(this.request, this.exceptionHandler);
         }
     }
 }

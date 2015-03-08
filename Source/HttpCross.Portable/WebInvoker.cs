@@ -11,7 +11,7 @@
 
     internal class WebInvoker
     {
-        internal static Task<HttpCrossResponse> Invoke(HttpCrossRequest crossRequest)
+        internal static Task<HttpCrossResponse> Invoke(HttpCrossRequest crossRequest, Action<HttpOperationException> exceptionHandler)
         {
             var task = Task.Factory.StartNew(() =>
             {
@@ -47,32 +47,39 @@
                 }
                 catch (WebException ex)
                 {
-                    throw PrepareOperationException(ex, crossRequest);
+                    HandleOperationException(ex, crossRequest, exceptionHandler);
                 }
                 catch (AggregateException ex)
                 {
                     var webException = ex.InnerExceptions.OfType<WebException>().FirstOrDefault();
                     if (webException != null)
                     {
-                        throw PrepareOperationException(webException, crossRequest);
+                        HandleOperationException(webException, crossRequest, exceptionHandler);
                     }
-
-                    throw;
                 }
+
+                return null;
             });
 
             return task;
         }
 
-        private static HttpOperationException PrepareOperationException(WebException ex, HttpCrossRequest crossRequest)
+        private static void HandleOperationException(WebException ex, HttpCrossRequest crossRequest, Action<HttpOperationException> exceptionHandler)
         {
-            HttpCrossResponse crossResponse;
             using (var response = (HttpWebResponse)ex.Response)
             {
-                crossResponse = HttpCrossResponse.Create(response);
-            }
+                var crossResponse = HttpCrossResponse.Create(response);
 
-            throw new HttpOperationException(ex.Message, crossRequest, crossResponse);
+                var operationException = new HttpOperationException(ex.Message, crossRequest, crossResponse);
+
+                if (exceptionHandler != null)
+                {
+                    exceptionHandler(operationException);
+                    return;
+                }
+
+                throw operationException;
+            }
         }
     }
 }

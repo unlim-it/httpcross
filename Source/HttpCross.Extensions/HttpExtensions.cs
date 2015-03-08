@@ -21,12 +21,25 @@
             return http;
         }
 
-        /// <summary>
-        /// Gets and deserializes response JSON body to specified type <see cref="TResult"/>.
-        /// </summary>
         public static Task<TResult> GetJson<TResult>(this Http http, string url = "")
         {
             var taskResult = http.Get(url)
+                .ContinueWith(responseTask => JsonConvert.DeserializeObject<TResult>(responseTask.Result.Body));
+
+            return taskResult;
+        }
+
+        public static Task<TResult> PostJson<TResult>(this Http http, string url = "")
+        {
+            var taskResult = http.Post(url)
+                .ContinueWith(responseTask => JsonConvert.DeserializeObject<TResult>(responseTask.Result.Body));
+
+            return taskResult;
+        }
+
+        public static Task<TResult> PutJson<TResult>(this Http http, string url = "")
+        {
+            var taskResult = http.Post(url)
                 .ContinueWith(responseTask => JsonConvert.DeserializeObject<TResult>(responseTask.Result.Body));
 
             return taskResult;
