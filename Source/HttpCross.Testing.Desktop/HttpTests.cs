@@ -4,9 +4,7 @@
     using System.Collections.Generic;
 
     using FluentAssertions;
-
     using HttpCross.Exceptions;
-
     using NUnit.Framework;
 
     public class HttpTests
