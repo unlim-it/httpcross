@@ -185,3 +185,5 @@ FakesAssemblies/
 
 #ClientBin
 HttpCross.Testing.Silverlight.xap
+*.StyleCop
+/Source/.nuget/packages.config
