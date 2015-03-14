@@ -61,6 +61,9 @@
             return this;
         }
 
+        /// <summary>
+        /// Exception handler.
+        /// </summary>
         public Http HandleException(Action<HttpOperationException> handler)
         {
             this.exceptionHandler = handler;

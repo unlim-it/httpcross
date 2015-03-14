@@ -20,7 +20,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{AFA07A
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpCross.Extensions.Portable", "HttpCross.Extensions\HttpCross.Extensions.Portable.csproj", "{ED33578B-8141-42BC-B9E4-53B344B98D29}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpCross.Extensions.Portable", "HttpCross.Extensions.Portable\HttpCross.Extensions.Portable.csproj", "{ED33578B-8141-42BC-B9E4-53B344B98D29}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portable", "Portable", "{4E4BA133-03E2-43A3-A386-339D9CCE2785}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Net", "Net", "{8A66DB3E-8EAD-481B-AFFE-35F08B040D75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,8 +57,10 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{225371AB-E5A7-47D2-BF0C-0BB519E1DF7E} = {4E4BA133-03E2-43A3-A386-339D9CCE2785}
 		{A79D7FD5-37E6-431D-B362-B6A5238D0436} = {29451F06-5A1A-4622-9FC0-CCE0CF0735B8}
 		{24DF1B91-64B4-4A70-B8D6-DA3867BAB83F} = {29451F06-5A1A-4622-9FC0-CCE0CF0735B8}
 		{87CCEA55-27C1-468F-ABD4-6AD609C08F37} = {29451F06-5A1A-4622-9FC0-CCE0CF0735B8}
+		{ED33578B-8141-42BC-B9E4-53B344B98D29} = {4E4BA133-03E2-43A3-A386-339D9CCE2785}
 	EndGlobalSection
 EndGlobal

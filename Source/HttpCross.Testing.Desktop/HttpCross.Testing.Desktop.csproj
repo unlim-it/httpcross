@@ -56,7 +56,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HttpCross.Extensions\HttpCross.Extensions.Portable.csproj">
+    <ProjectReference Include="..\HttpCross.Extensions.Portable\HttpCross.Extensions.Portable.csproj">
       <Project>{ed33578b-8141-42bc-b9e4-53b344b98d29}</Project>
       <Name>HttpCross.Extensions.Portable</Name>
     </ProjectReference>
