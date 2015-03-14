@@ -37,12 +37,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\HttpOperationException.cs" />
-    <Compile Include="Exceptions\HttpCrossException.cs" />
-    <Compile Include="Http.cs" />
-    <Compile Include="WebInvoker.cs" />
-    <Compile Include="HttpCrossRequest.cs" />
-    <Compile Include="HttpCrossResponse.cs" />
+    <Compile Include="..\HttpCross\Exceptions\HttpCrossException.cs">
+      <Link>Exceptions\HttpCrossException.cs</Link>
+    </Compile>
+    <Compile Include="..\HttpCross\Exceptions\HttpOperationException.cs">
+      <Link>Exceptions\HttpOperationException.cs</Link>
+    </Compile>
+    <Compile Include="..\HttpCross\Http.cs">
+      <Link>Http.cs</Link>
+    </Compile>
+    <Compile Include="..\HttpCross\HttpCrossRequest.cs">
+      <Link>HttpCrossRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\HttpCross\HttpCrossResponse.cs">
+      <Link>HttpCrossResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\HttpCross\WebInvoker.cs">
+      <Link>WebInvoker.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

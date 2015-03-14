@@ -32,7 +32,7 @@ namespace HttpCross
                         .Select(it => new { key = it, value = response.Headers[it] })
                         .ToDictionary(it => it.key, it => it.value);
                 }
-                
+
                 return crossResponse;
             }
         }
