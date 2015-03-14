@@ -46,10 +46,10 @@ await Http.New
 	.WithHeader("x-auth-token", "YW55IGNhcm5hbCBwb")
 	.WithJsonBody(new
         {
-        	name = "Domain-Driven Design: Tackling Complexity in the Heart of Software",
-        	author = "Eric Evans",
-        	publication_date = new DateTime(2003, 08, 01),
-        	number_of_pages = 320
+		name = "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+		author = "Eric Evans",
+		publication_date = new DateTime(2003, 08, 01),
+		number_of_pages = 320
         })
 	.Put("http://localhost:5055/api/books/7439");
 ```
