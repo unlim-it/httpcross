@@ -20,23 +20,23 @@
 **GET**
 
 ```c#
-    var books = await Http.New
-		.WithHeader("x-auth-token", "YW55IGNhcm5hbCBwb")
-		.GetJson<List<Book>>("http://localhost:5055/api/books");
+var books = await Http.New
+	.WithHeader("x-auth-token", "YW55IGNhcm5hbCBwb")
+	.GetJson<List<Book>>("http://localhost:5055/api/books");
 ```
 
 **POST**
 
 ```c#
-	var book = await Http.New
-		.WithHeader("x-auth-token", "YW55IGNhcm5hbCBwb")
-		.WithJsonBody(new
-        {
-            name = "Domain-Driven Design: Tackling Complexity in the Heart of Software",
-            author = "Eric Evans",
-            publication_date = new DateTime(2003, 08, 01)
-        })
-        .Post("http://localhost:5055/api/books");
+await Http.New
+	.WithHeader("x-auth-token", "YW55IGNhcm5hbCBwb")
+	.WithJsonBody(new
+	{
+		name = "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+		author = "Eric Evans",
+		publication_date = new DateTime(2003, 08, 01)
+	})
+	.Post("http://localhost:5055/api/books");
 ```
 
 **PUT**
