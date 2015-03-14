@@ -11,57 +11,49 @@
 
     internal class WebInvoker
     {
-        internal static Task<HttpCrossResponse> Invoke(HttpCrossRequest crossRequest, Action<HttpOperationException> exceptionHandler)
+        internal static async Task<HttpCrossResponse> Invoke(HttpCrossRequest crossRequest, Action<HttpOperationException> exceptionHandler)
         {
-            var task = Task.Factory.StartNew(() =>
+            try
             {
-                try
+                var request = WebRequest.Create(crossRequest.URL);
+                request.Method = crossRequest.Method;
+
+                foreach (var header in crossRequest.Headers)
                 {
-                    var request = WebRequest.Create(crossRequest.URL);
-                    request.Method = crossRequest.Method;
-
-                    foreach (var header in crossRequest.Headers)
-                    {
-                        request.Headers[header.Key] = header.Value;
-                    }
-
-                    if (request.Method != "GET")
-                    {
-                        var streamTask = Task.Factory.FromAsync<Stream>(
-                            request.BeginGetRequestStream,
-                            request.EndGetRequestStream,
-                            request);
-
-                        var requestStream = streamTask.Result;
-                        using (requestStream)
-                        {
-                            var requestData = Encoding.UTF8.GetBytes(crossRequest.Body);
-                            requestStream.Write(requestData, 0, requestData.Length);
-                        }
-                    }
-
-                    var webResponse = Task<WebResponse>.Factory
-                        .FromAsync(request.BeginGetResponse, request.EndGetResponse, request).Result;
-
-                    return HttpCrossResponse.Create((HttpWebResponse)webResponse);
+                    request.Headers[header.Key] = header.Value;
                 }
-                catch (WebException ex)
+
+                if (request.Method != "GET")
                 {
-                    HandleOperationException(ex, crossRequest, exceptionHandler);
-                }
-                catch (AggregateException ex)
-                {
-                    var webException = ex.InnerExceptions.OfType<WebException>().FirstOrDefault();
-                    if (webException != null)
+                    var requestStream = await Task.Factory 
+                        .FromAsync<Stream>(request.BeginGetRequestStream, request.EndGetRequestStream, request);
+
+                    using (requestStream)
                     {
-                        HandleOperationException(webException, crossRequest, exceptionHandler);
+                        var requestData = Encoding.UTF8.GetBytes(crossRequest.Body);
+                        requestStream.Write(requestData, 0, requestData.Length);
                     }
                 }
 
-                return null;
-            });
+                var webResponse = Task<WebResponse>.Factory
+                    .FromAsync(request.BeginGetResponse, request.EndGetResponse, request).Result;
 
-            return task;
+                return HttpCrossResponse.Create((HttpWebResponse)webResponse);
+            }
+            catch (WebException ex)
+            {
+                HandleOperationException(ex, crossRequest, exceptionHandler);
+            }
+            catch (AggregateException ex)
+            {
+                var webException = ex.InnerExceptions.OfType<WebException>().FirstOrDefault();
+                if (webException != null)
+                {
+                    HandleOperationException(webException, crossRequest, exceptionHandler);
+                }
+            }
+
+            return null;
         }
 
         private static void HandleOperationException(WebException ex, HttpCrossRequest crossRequest, Action<HttpOperationException> exceptionHandler)

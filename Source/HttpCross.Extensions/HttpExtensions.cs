@@ -21,28 +21,28 @@
             return http;
         }
 
-        public static Task<TResult> GetJson<TResult>(this Http http, string url = "")
+        public static async Task<TResult> GetJson<TResult>(this Http http, string url = "")
         {
-            var taskResult = http.Get(url)
-                .ContinueWith(responseTask => JsonConvert.DeserializeObject<TResult>(responseTask.Result.Body));
-
-            return taskResult;
+            var response = await http.Get(url);
+            return JsonConvert.DeserializeObject<TResult>(response.Body);
         }
 
-        public static Task<TResult> PostJson<TResult>(this Http http, string url = "")
+        public static async Task<TResult> PostJson<TResult>(this Http http, string url = "")
         {
-            var taskResult = http.Post(url)
-                .ContinueWith(responseTask => JsonConvert.DeserializeObject<TResult>(responseTask.Result.Body));
-
-            return taskResult;
+            var response = await http.Post(url);
+            return JsonConvert.DeserializeObject<TResult>(response.Body);
         }
 
-        public static Task<TResult> PutJson<TResult>(this Http http, string url = "")
+        public async static Task<TResult> PutJson<TResult>(this Http http, string url = "")
         {
-            var taskResult = http.Post(url)
-                .ContinueWith(responseTask => JsonConvert.DeserializeObject<TResult>(responseTask.Result.Body));
+            var response = await http.Post(url);
+            return JsonConvert.DeserializeObject<TResult>(response.Body);
+        }
 
-            return taskResult;
+        public async static Task<TResult> DeleteJson<TResult>(this Http http, string url = "")
+        {
+            var response = await http.Post(url);
+            return JsonConvert.DeserializeObject<TResult>(response.Body);
         }
     }
 }

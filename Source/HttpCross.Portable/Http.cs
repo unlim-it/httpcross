@@ -70,45 +70,45 @@
         /// <summary>
         /// Requests a representation of the specified resource.
         /// </summary>
-        public Task<HttpCrossResponse> Get(string url = "")
+        public async Task<HttpCrossResponse> Get(string url = "")
         {
             this.request.URL += url;
             this.request.Method = "GET";
 
-            return WebInvoker.Invoke(this.request, this.exceptionHandler);
+            return await WebInvoker.Invoke(this.request, this.exceptionHandler);
         }
 
         /// <summary>
         /// Submits data to be processed to a specified resource.
         /// </summary>
-        public Task<HttpCrossResponse> Post(string url = "")
+        public async Task<HttpCrossResponse> Post(string url = "")
         {
             this.request.URL += url;
             this.request.Method = "POST";
 
-            return WebInvoker.Invoke(this.request, this.exceptionHandler);
+            return await WebInvoker.Invoke(this.request, this.exceptionHandler);
         }
 
         /// <summary>
         /// Submits data to be processed to a specified resource.
         /// </summary>
-        public Task<HttpCrossResponse> Put(string url = "")
+        public async Task<HttpCrossResponse> Put(string url = "")
         {
             this.request.URL += url;
             this.request.Method = "PUT";
 
-            return WebInvoker.Invoke(this.request, this.exceptionHandler);
+            return await WebInvoker.Invoke(this.request, this.exceptionHandler);
         }
         
         /// <summary>
         /// Deletes the specified resource.
         /// </summary>
-        public Task<HttpCrossResponse> Delete(string url = "")
+        public async Task<HttpCrossResponse> Delete(string url = "")
         {
             this.request.URL += url;
             this.request.Method = "DELETE";
 
-            return WebInvoker.Invoke(this.request, this.exceptionHandler);
+            return await WebInvoker.Invoke(this.request, this.exceptionHandler);
         }
     }
 }
